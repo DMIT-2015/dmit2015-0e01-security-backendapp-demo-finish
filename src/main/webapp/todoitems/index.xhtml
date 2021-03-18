@@ -61,10 +61,14 @@
 
                     |
 
-                    <b:link id="deleteLink" outcome="delete" icon-awesome="trash">
-                        <f:param name="editId" value="#{currentItem.id}"/>
-                        delete
-                    </b:link>
+                    <c:if test="#{request.isUserInRole('ADMIN') || request.isUserInRole('Executive')}">
+                        <b:link id="deleteLink" outcome="delete" icon-awesome="trash">
+                            <f:param name="editId" value="#{currentItem.id}"/>
+                            delete
+                        </b:link>
+                    </c:if>
+
+
                 </b:dataTableColumn>
             </b:dataTable>
 

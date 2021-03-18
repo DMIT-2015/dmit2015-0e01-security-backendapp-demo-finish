@@ -25,19 +25,23 @@
     </context-param>
     <context-param>
         <param-name>javax.faces.FACELETS_BUFFER_SIZE</param-name>
-        <param-value>102400</param-value> <!-- 100 kB, so that the AjaxExceptionHandler has chance to reset the response when an exception occurs during render response phase. -->
+        <param-value>102400
+        </param-value> <!-- 100 kB, so that the AjaxExceptionHandler has chance to reset the response when an exception occurs during render response phase. -->
     </context-param>
     <context-param>
         <param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
-        <param-value>true</param-value> <!-- Prevent comments from evaluating any EL expressions and ending up in generated HTML output. -->
+        <param-value>true
+        </param-value> <!-- Prevent comments from evaluating any EL expressions and ending up in generated HTML output. -->
     </context-param>
     <context-param>
         <param-name>javax.faces.INTERPRET_EMPTY_STRING_SUBMITTED_VALUES_AS_NULL</param-name>
-        <param-value>true</param-value> <!-- Prevent empty string submitted values from polluting the model with empty strings instead of nulls. -->
+        <param-value>true
+        </param-value> <!-- Prevent empty string submitted values from polluting the model with empty strings instead of nulls. -->
     </context-param>
     <context-param>
         <param-name>javax.faces.PROJECT_STAGE</param-name>
-        <param-value>Development</param-value> <!-- Switchable between Development, UnitTest, SystemTest and Production. -->
+        <param-value>Development
+        </param-value> <!-- Switchable between Development, UnitTest, SystemTest and Production. -->
     </context-param>
     <context-param>
         <param-name>javax.faces.validator.ENABLE_VALIDATE_WHOLE_BEAN</param-name>
@@ -69,20 +73,91 @@
         <servlet-name>H2Console</servlet-name>
         <url-pattern>/h2-console/*</url-pattern>
     </servlet-mapping>
-    <!--
-    <security-role>
-        <role-name>admin</role-name>
-    </security-role>
+
     <security-constraint>
         <web-resource-collection>
             <web-resource-name>H2 Console</web-resource-name>
             <url-pattern>/h2-console/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
-            <role-name>admin</role-name>
+            <role-name>DEVELOPER</role-name>
         </auth-constraint>
     </security-constraint>
-    -->
+
+    <security-constraint>
+        <display-name>Use HTTPS only</display-name>
+        <web-resource-collection>
+            <web-resource-name>sslResources</web-resource-name>
+            <url-pattern>/*</url-pattern>
+        </web-resource-collection>
+        <user-data-constraint>
+            <transport-guarantee>CONFIDENTIAL</transport-guarantee>
+        </user-data-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Restricted Delete Resources</web-resource-name>
+            <url-pattern>/todoitems/delete.xhtml</url-pattern>
+            <url-pattern>/movies/delete.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>ADMIN</role-name>
+            <role-name>Executive</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Restricted Create Edit Resources</web-resource-name>
+            <url-pattern>/todoitems/create.xhtml</url-pattern>
+            <url-pattern>/todoitems/edit.xhtml</url-pattern>
+            <url-pattern>/movies/create.xhtml</url-pattern>
+            <url-pattern>/movies/edit.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>USER</role-name>
+            <role-name>Sales</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Embedded (in-memory) assigned role -->
+    <security-role>
+        <role-name>DEVELOPER</role-name>
+    </security-role>
+
+    <!-- Database assigned roles -->
+    <security-role>
+        <role-name>ADMIN</role-name>
+    </security-role>
+    <security-role>
+        <role-name>USER</role-name>
+    </security-role>
+
+    <!-- LDAP assigned security roles -->
+    <security-role>
+        <role-name>Executive</role-name>
+    </security-role>
+    <security-role>
+        <role-name>Sales</role-name>
+    </security-role>
+
+    <error-page>
+        <error-code>401</error-code>
+        <location>/errorpages/401.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/errorpages/403.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/errorpages/404.xhtml</location>
+    </error-page>
+    <error-page>
+        <error-code>500</error-code>
+        <location>/errorpages/500.xhtml</location>
+    </error-page>
 
 </web-app>
 
