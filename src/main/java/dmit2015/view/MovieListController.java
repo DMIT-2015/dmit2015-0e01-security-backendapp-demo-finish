@@ -30,6 +30,8 @@ public class MovieListController implements Serializable {
     void init() {
         try {
             movies = _movieRepository.findAll();
+        } catch (RuntimeException e) {
+            Messages.addFlashGlobalInfo(e.getMessage());
         } catch (Exception ex) {
             Messages.addGlobalFatal("Error fetching movies from system.");
             logger.info(ex.getMessage());

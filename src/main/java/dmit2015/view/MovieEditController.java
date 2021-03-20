@@ -45,6 +45,8 @@ public class MovieEditController implements Serializable {
             _movieRepository.update(existingMovie);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
+        } catch (RuntimeException e) {
+            Messages.addFlashGlobalInfo(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Messages.addGlobalError("Update was not successful.");
@@ -58,6 +60,8 @@ public class MovieEditController implements Serializable {
             _movieRepository.remove(existingMovie.getId());
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
+        } catch (RuntimeException e) {
+            Messages.addFlashGlobalInfo(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Messages.addGlobalError("Delete not successful.");

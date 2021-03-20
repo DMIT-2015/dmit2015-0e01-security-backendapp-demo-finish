@@ -25,6 +25,8 @@ public class TodoItemCreateController {
             _todoitemRepository.add(newTodoItem);
             Messages.addFlashGlobalInfo("Create was successful.");
             nextPage = "index?faces-redirect=true";
+        } catch (RuntimeException e) {
+            Messages.addFlashGlobalInfo(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Messages.addGlobalError("Create was not successful.");

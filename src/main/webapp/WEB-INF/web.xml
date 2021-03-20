@@ -97,27 +97,35 @@
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Restricted Delete Resources</web-resource-name>
-            <url-pattern>/todoitems/delete.xhtml</url-pattern>
+            <web-resource-name>MovieDeleteResources</web-resource-name>
             <url-pattern>/movies/delete.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>ADMIN</role-name>
-            <role-name>Executive</role-name>
+            <role-name>IT</role-name>
+            <role-name>Administration</role-name>
         </auth-constraint>
     </security-constraint>
 
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Restricted Create Edit Resources</web-resource-name>
-            <url-pattern>/todoitems/create.xhtml</url-pattern>
-            <url-pattern>/todoitems/edit.xhtml</url-pattern>
+            <web-resource-name>MovieCreateEditResources</web-resource-name>
             <url-pattern>/movies/create.xhtml</url-pattern>
             <url-pattern>/movies/edit.xhtml</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>USER</role-name>
             <role-name>Sales</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>TodoItemResources</web-resource-name>
+            <url-pattern>/todoitems/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>**</role-name>
         </auth-constraint>
     </security-constraint>
 
@@ -136,10 +144,13 @@
 
     <!-- LDAP assigned security roles -->
     <security-role>
-        <role-name>Executive</role-name>
+        <role-name>Administration</role-name>
     </security-role>
     <security-role>
         <role-name>Sales</role-name>
+    </security-role>
+    <security-role>
+        <role-name>IT</role-name>
     </security-role>
 
     <error-page>

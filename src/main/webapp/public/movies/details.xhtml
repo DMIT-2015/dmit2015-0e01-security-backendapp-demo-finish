@@ -13,12 +13,12 @@
         xmlns:b="http://bootsfaces.net/ui"
         template="/WEB-INF/jsf-templates/layout.xhtml">
 
-    <ui:param name="title" value="Delete TodoItem"/>
+    <ui:param name="title" value="Movie Details"/>
 
     <ui:define name="maincontent">
 
         <b:jumbotron>
-            <h1>TodoItem Details</h1>
+            <h1>Movie Details</h1>
         </b:jumbotron>
 
         <b:messages id="messages"/>
@@ -27,14 +27,10 @@
 
             <ui:include src="detailsContent.xhtml"></ui:include>
 
-            <b:commandButton value="Delete"
-                             look="danger"
-                             iconAwesome="trash"
-                             action="#{currentTodoItemEditController.onDelete}"
-                             immediate="true"
-                             onclick="return confirm('Are you sure you want to delete this item?')"
-                             ajax="false"
-            />
+            <b:link id="editLink" outcome="edit" icon-awesome="edit">
+                <f:param name="editId" value="#{currentMovieEditController.editId}"/>
+                edit
+            </b:link>
             |
             <b:link id="backToListLink" outcome="index">
                 Back to List

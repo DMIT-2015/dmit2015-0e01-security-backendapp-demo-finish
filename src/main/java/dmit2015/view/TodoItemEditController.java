@@ -45,6 +45,8 @@ public class TodoItemEditController implements Serializable {
             _todoitemRepository.update(existingTodoItem);
             Messages.addFlashGlobalInfo("Update was successful.");
             nextPage = "index?faces-redirect=true";
+        } catch (RuntimeException e) {
+            Messages.addFlashGlobalInfo(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Messages.addGlobalError("Update was not successful.");
@@ -58,6 +60,8 @@ public class TodoItemEditController implements Serializable {
             _todoitemRepository.remove(existingTodoItem.getId());
             Messages.addFlashGlobalInfo("Delete was successful.");
             nextPage = "index?faces-redirect=true";
+        } catch (RuntimeException e) {
+            Messages.addFlashGlobalInfo(e.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
             Messages.addGlobalError("Delete not successful.");
